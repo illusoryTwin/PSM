@@ -32,7 +32,7 @@ PRESENT_POSITION_ADDR = 132
 BAUDRATE = 3000000
 PROTOCOL_VERSION = 2.0
 DXL_ID = 2
-DEVICENAME = '/dev/ttyUSB1'
+DEVICENAME = '/dev/ttyUSB0'
 TORQUE_ENABLE = 1
 TORQUE_DISABLE = 0
 DXL_MOVING_STATUS_THRESHOLD = 20
@@ -177,13 +177,13 @@ class Motor:
 
 
 #motor = Motor(DXL_ID, PROTOCOL_VERSION, DEVICENAME, BAUDRATE, ADDR_TORQUE_ENABLE, ADDR_GOAL_POSITION, ADDR_PRESENT_POSITION, DXL_MINIMUM_POSITION_VALUE, DXL_MAXIMUM_POSITION_VALUE, DXL_MOVING_STATUS_THRESHOLD)
-motor = Motor(2, '/dev/ttyUSB1')
+motor = Motor(2, '/dev/ttyUSB0')
 motor.initialize()
 
 pos = motor.get_current_pos()
 print("pos", pos)
 
-motor.absolute_move_motor(1000)
+motor.absolute_move_motor(200)
 
 
 motor.close()
