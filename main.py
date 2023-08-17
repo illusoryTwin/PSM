@@ -73,7 +73,7 @@ class Motor:
         else:
             print("Dynamixel has been successfully connected")
 
-    def absolute_move_motor(self, position):
+    def absolute_move_motor(self, target_position):
         index = 0
         while True:
             print("Press any key to continue! (or press ESC to quit!)")
@@ -85,7 +85,7 @@ class Motor:
             #     self.portHandler, self.DXL_ID, ADDR_GOAL_POSITION, dxl_goal_position[index])
 
             dxl_comm_result, dxl_error = self.packetHandler.write4ByteTxRx(
-                self.portHandler, self.DXL_ID, ADDR_GOAL_POSITION, position)
+                self.portHandler, self.DXL_ID, ADDR_GOAL_POSITION, target_position)
 
             if dxl_comm_result != COMM_SUCCESS:
                 print("%s" % self.packetHandler.getTxRxResult(dxl_comm_result))
@@ -192,7 +192,8 @@ class Motor:
             else:
                 index = 0
 
-    def relative_move_motor_by_angle(self, curr_position, angle_change):
+    def relative_move_motor_by_angle(self, angle_change):
+        curr_position = self.get_current_pos()
         index = 0
         while True:
             print("Press any key to continue! (or press ESC to quit!)")
@@ -262,9 +263,10 @@ motor.initialize()
 
 pos = motor.get_current_pos()
 print("pos", pos)
-motor.relative_move_motor_by_angle(pos, 100)
 
-# motor.absolute_move_motor(4095*2)
-# motor.absolute_move_motor_by_angle(90)
+motor.relative_move_motor_by_angle(100)
+
+# motor.absolute_move_motor(90)
+# motor.absolute_move_motor_by_angle(1090)
 
 motor.close()
