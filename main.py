@@ -153,7 +153,8 @@ class Motor:
                 index = 0
 
 
-    def relative_move_motor(self, curr_position, pos_change):
+    def relative_move_motor(self, pos_change):
+        curr_position = self.get_current_pos()
         index = 0
         while True:
             print("Press any key to continue! (or press ESC to quit!)")
